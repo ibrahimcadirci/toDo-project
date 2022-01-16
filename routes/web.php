@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WorkPlanController;
 use App\Services\BusinessDepartment;
 use App\Services\ItDepartment;
 use App\Services\WorkList;
@@ -16,9 +17,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $data           = new ItDepartment();
-    $data2           = new BusinessDepartment();
-    return WorkList::getApiServices();
-    return $data2->getData();
-});
+Route::get('/', [WorkPlanController::class, 'index'])->name('workplan');

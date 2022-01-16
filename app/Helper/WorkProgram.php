@@ -10,21 +10,21 @@ class WorkProgram{
         try{
             $plan           = collect();
             foreach($jobs as $job){ 
-                $jobDevelopers          = $developers->where('skill_level','>=',$job['diffuculty'])->sortBy('skill_level');
+                $jobDevelopers          = $developers->where('skill_level','>=',$job['difficulty'])->sortBy('skill_level');
                 $assignment             = null;
                 $totalTime              = null;
                 foreach($jobDevelopers as $dev){
                     if(!is_null($totalTime)){
                         if($plan->where('dev_id', $dev->id)->sum('time') < $totalTime){
                             $totalTime              = $plan->where('dev_id', $dev->id)->sum('time');
-                            $assignment                    = $dev;
+                            $assignment             = $dev;
                         }
                     }else{
                         $totalTime                      = $plan->where('dev_id', $dev->id)->sum('time');
                         $assignment                    = $dev;
                     }
                 }
-                $plan->push(["title" => $job['title'] ,"dev_id" => $assignment->id, "time"    => round(($job['diffuculty'] * $job['time'] / $assignment->skill_level),1) ]);
+                $plan->push(["title" => $job['title'] ,"dev_id" => $assignment->id,"dev" => $assignment, "time"    => round(($job['difficulty'] * $job['time'] / $assignment->skill_level),1) ]);
             }
             return $plan;
         }catch(Throwable $e){
