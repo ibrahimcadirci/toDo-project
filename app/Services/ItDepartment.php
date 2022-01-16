@@ -14,7 +14,6 @@ class ItDepartment extends WorkList implements WorkListInterface {
             foreach($works as $row){    
                 $this->works->push(["title" => $row->id, "difficulty" => $row->zorluk, "time"   => $row->sure]);
             }
-            dd( $this->works);
             return $this->works;
         }catch(Exception $e){
             return "Veri bulunamadı. Lütfen api servislerini kontrol edin. Error : ". $e->getMessage();
