@@ -3,7 +3,7 @@ namespace App\Services;
 
 use Exception;
 
-class BusinessDepartment extends WorkListInterface {
+class BusinessDepartment extends WorkList implements  WorkListInterface {
     protected $baseUrl          = "http://www.mocky.io/v2/5d47f235330000623fa3ebf7";
     protected $works;
     public function getData(){
