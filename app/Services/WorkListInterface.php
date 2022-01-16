@@ -9,4 +9,8 @@ abstract class WorkListInterface {
         $works          = file_get_contents($this->baseUrl);
         return json_decode($works);
     }
+
+    public function dataFormat(){
+        
+    }
 }

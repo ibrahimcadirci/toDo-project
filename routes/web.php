@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\BusinessDepartment;
 use App\Services\ItDepartment;
 use Illuminate\Support\Facades\Route;
 
@@ -16,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $data           = new ItDepartment();
-    return $data->getData();
+    $data2           = new BusinessDepartment();
+    return $data2->getData();
 });
