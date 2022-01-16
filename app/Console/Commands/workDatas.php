@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Works\Work;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class workDatas extends Command
 {
@@ -40,6 +42,11 @@ class workDatas extends Command
         $WorkList           = \WorkList::getApiServices();
         foreach($WorkList as $class){
             $data =  new $class;
+            DB::transaction(function () use ($data){ 
+                // Transaction kullanarak olası bir hata durumunda işlemlerin geri alınmasını sağlıyoruz
+                DB::table('works')->insert($data->getData()->toArray());
+
+            });
         }
         return true;
     }
