@@ -19,5 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $data           = new ItDepartment();
     $data2           = new BusinessDepartment();
+    return WorkList::getApiServices();
     return $data2->getData();
 });

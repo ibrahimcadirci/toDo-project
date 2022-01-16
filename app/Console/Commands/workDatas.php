@@ -37,7 +37,10 @@ class workDatas extends Command
      */
     public function handle()
     {
-        
+        $WorkList           = \WorkList::getApiServices();
+        foreach($WorkList as $class){
+            $data =  new $class;
+        }
         return true;
     }
 }
