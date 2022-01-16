@@ -5,10 +5,11 @@ use Exception;
 use Throwable;
 
 class WorkProgram{
-
+    protected $averageTime;
     public function workProgram($jobs,$developers){
         try{
             $plan           = collect();
+            $this->averageTime    = $this->averageFinish($jobs,$developers);
             foreach($jobs as $job){ 
                 $jobDevelopers          = $developers->where('skill_level','>=',$job['difficulty'])->sortBy('skill_level');
                 $assignment             = null;
@@ -24,13 +25,26 @@ class WorkProgram{
                         $assignment                    = $dev;
                     }
                 }
-                $plan->push(["title" => $job['title'] ,"dev_id" => $assignment->id,"dev" => $assignment, "time"    => round(($job['difficulty'] * $job['time'] / $assignment->skill_level),1) ]);
+                $week           = $plan->where('dev_id', $assignment->id)->sum('time') > 1 ? (ceil($plan->where('dev_id', $assignment->id)->sum('time') / 45)) : 1; 
+                $plan->push(["title" => $job['title'] ,"dev_id" => $assignment->id,"dev" => $assignment, "time"    => round(($job['difficulty'] * $job['time'] / $assignment->skill_level),1), "week" => $week ]);
+
             }
             return $plan;
         }catch(Throwable $e){
             return 'Beklenmeyen Veri Tipi';
         }
-        
+    }
 
+    public function averageFinish($jobs,$developers){
+        $everageTime      = 0;
+        foreach($jobs as $row){
+            $everageTime      += $row->difficulty * $row->time;
+        }
+
+        return $everageTime / $developers->sum('skill_level');
+    }
+
+    public function getaverage(){
+        return $this->averageTime;
     }
 }

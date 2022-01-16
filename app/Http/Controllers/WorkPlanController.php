@@ -13,11 +13,11 @@ class WorkPlanController extends Controller
         $workProgram    = new WorkProgram();
         $developers     = User::get();
         $jobs           = Work::get();
-        $workProgram      = $workProgram->workProgram($jobs,$developers)->groupBy('dev_id') ;
-        /* foreach($workProgram as $key =>  $row){
-            echo $key . ' --> '. $row->sum('time') . '<br>';
-        }*/
+        $totalTime      = 0;
+  
+        $workProgramData      = $workProgram->workProgram($jobs,$developers)->groupBy('dev_id') ;
+        $averageFinish      = $workProgram->getaverage() ;
 
-        return view('workplan',compact('workProgram'));
+        return view('workplan',compact('workProgramData','averageFinish'));
     }
 }
