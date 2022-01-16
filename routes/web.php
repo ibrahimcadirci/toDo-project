@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\ItDepartment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $data           = new ItDepartment();
+    return $data->getData();
 });
