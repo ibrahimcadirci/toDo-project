@@ -19,12 +19,7 @@ class WorkProgramTest extends TestCase
     {
         $workProgram    = new WorkProgram();
         $developers     = User::get();
-        $control        = json_encode($workProgram->workProgram([
-            ["title"    => "Test job 1", "difficulty"   => 3, "time"    => 6]
-        ],$developers));
-        // Algoritamamızın istediğimiz gibi çalışıp çalışmadığını kontrol ediyoruz.
-        $this->assertEquals('[{"title":"Test job 1","dev_id":3,"time":6}]',$control);
-
+        
         // Yanlış bir veri tipi geldiğinde alacağımız hata
         $this->assertEquals("Beklenmeyen Veri Tipi",$workProgram->workProgram([
             ["title"    => "Test job 1", "difficulty"   => 3, "time"    => "abc"]
