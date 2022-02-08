@@ -1,7 +1,13 @@
 # Work Plan Project
 ## Yazılım Hakkında
 
-Developer’ların haftalık 45 saat çalıştığı varsayılarak, en kısa sürede işlerin bitmesini sağlayan bir algoritma ile haftalık developer bazında iş yapma programını ve işin minimum toplam kaç haftada biteceğini ekrana basacak bir ara yüz hazırlanmalı.
+### Görev:
+Picqer API ve Laravel framework kullanarak aşağıdaki özellikleri içeren web uygulaması geliştirin:
+1. Picqer API'sinden tüm ürün verilerini alın ve verileri benzer bir modelle yerel bir mysql veritabanında
+saklayın.
+2. Picqer API'sinden Getirilen Ürünler için CRUD (Oluştur, Oku, Güncelle ve Sil) işlevi oluşturun. (Yerel
+veritabanındaki değişiklikler API'ye yansıtılmalıdır)
+3. Kullanıcı arayüzü aracılığıyla ürün stok değerini güncelleme işlevi oluşturun.
 
 - Programlama Dili : **PHP**
 - Kullanılan Framework : **Laravel**
@@ -20,27 +26,24 @@ Sıradaki işlemimiz de .env dosyamızı açarak DB_DATABASE, DB_USERNAME, DB_PA
 php artisan migrate 
 ```
 Bu komutu çalıştırdıktan sonra kullanacağımız tablolarımız veritabanımızda oluşacak. 
-Proje için gerekli ilk verilerin oluşması için de aşağıdaki komut ile devam etmemiz gerekiyor
+
+Ardından Test kodlarını çalıştırmak için aşağıdaki komutu çalıştırabilirsiniz.
 ```
-php artisan DB:seed 
+php artisan test 
 ```
-Bu komut ile kullanıcılarımız otomatik bir şekilde factory patter'ini de kullanarak oluşturulacaktır. 
 
 Son olarak api'den verileri çekip veritabanımıza kaydetmek için aşağıdaki komutu kullanmamız gerekiyor 
 ```
-php artisan command:workDatas 
+php artisan product:create
+php artisan warehouses:create
 ```
 
-Bu işlemin ardından projemiz çalışmaya hazır halde olacak. Projeyi dilerseniz localhost aracılığıyla açabilir yada aşağıdaki komut ile proxy ile http://127.0.0.1:8000/ adresinde çalıştırabilirsiniz.
+Bu işlemin ardından projemiz çalışmaya hazır halde olacak. Projeyi dilerseniz localhost aracılığıyla açabilir yada aşağıdaki komut ile http://127.0.0.1:8000/ adresinde çalıştırabilirsiniz.
 ```
 php artisan serve
 ```
 
-Ana dizini açtığınızda sizi çalışma programı karşılayacaktır.
+Ana dizini açtığınızda sizi ürünler listesli karşılayacaktır.
 
-## Test Kodları
-Çalışma programı fonksiyonu için hazırlamış olduğum test kodunu aşağıdaki komut ile çalıştırıp sonuçları kontrol edebilrisiniz
-```
-php artisan test
-```
+
 
